@@ -35,7 +35,8 @@ def pdf_to_pdf(pdf_file, output_pdf):
 def office_to_pdf(input_file, output_pdf):
     print(f"creating PDF: {input_file}")
     try:
-        subprocess.run(["unoco", "-f", "pdf", "-o", output_pdf, input_file], check=True)
+#        subprocess.run(["unoco", "-f", "pdf", "-o", output_pdf, input_file], check=True)
+        subprocess.run(["libreoffice", "--headless", "--convert-to", "pdf", input_file, "--outdir", output_pdf], check=True)
         print(f"Successfully converted {input_file} to {output_pdf}")
     except subprocess.CalledProcessError as e:
         print(f"Error converting file: {e}")
@@ -68,7 +69,8 @@ def convert_files(files, input_directory, output_pdf_root):
         out_file = add_pdf_extension("-".join(path_parts))
         file_type = classify_file(file)
         if file_type == "office":
-            office_to_pdf(os.path.join(input_directory, file), os.path.join(output_pdf_root, out_file))
+#            office_to_pdf(os.path.join(input_directory, file), os.path.join(output_pdf_root, out_file))
+            office_to_pdf(os.path.join(input_directory, file), output_pdf_root)
         elif file_type == "pdf":
             pdf_to_pdf(os.path.join(input_directory, file), os.path.join(output_pdf_root, out_file))
         else:

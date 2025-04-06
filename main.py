@@ -61,7 +61,7 @@ if __name__ == '__main__':
     infiles = list_files_in_directory(args.in_directory, env_dict["FILE_FORMATS"])
     print(f"Number of infiles: {len(infiles)}")
     is_directory_writable(args.out_directory)
-#    convert_files(infiles, args.in_directory, args.out_directory)
+    convert_files(infiles, args.in_directory, args.out_directory)
     parsed = files_text_from_directory(args.out_directory, args.chunk_size, args.overlapping_size, args.embedding_model, args.overlapping_size + 1)
     if(args.token_count):
         total_chunks = token_count(parsed)
