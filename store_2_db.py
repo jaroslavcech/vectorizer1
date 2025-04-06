@@ -50,6 +50,30 @@ def store_chunks(model, env_dict,parsed_files):
     except Exception as e:
         print(f"Exception {e}")
 
+def create_index(env_dict):
+    try:
+        db_host = env_dict['DB_HOST']
+        port = env_dict['DB_PORT']
+        db_user = env_dict['DB_USER']
+        password = env_dict['DB_PASSWORD']
+        db_name = env_dict['DB_NAME']
+        table_name = env_dict['DB_TABLE_NAME']
+        # Connect to the default postgres database to check/create database
+        print(f"Starting to create index on  {db_name}, table {table_name}")
+        conn = psycopg2.connect(dbname=db_name, user=db_user, password=password, host=db_host, port=port)
+        conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+        cursor = conn.cursor()
+        delete_str = f"DROP INDEX IF EXISTS {db_name}_{table_name}_idx"
+        cursor.execute(delete_str)
+        query_str = f"CREATE INDEX ON {table_name} USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100)"
+        cursor.execute(query_str)
+        cursor.close()
+        conn.close()
+        print(f"Index created: {db_name}_{table_name}_idx")
+    except Exception as e:
+        print(f"Exception {e}")
+
+
 
 def setup_database_and_table(model, env_dict):
     db_host = env_dict['DB_HOST']

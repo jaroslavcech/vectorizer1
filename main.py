@@ -7,7 +7,7 @@ from arguments import parse_args, get_env
 from pathlib import Path
 from convert_2_pdf import convert_files
 from pdf_2_text import files_text_from_directory, token_count, text_price
-from store_2_db import store_chunks, setup_database_and_table
+from store_2_db import store_chunks, setup_database_and_table, create_index
 
 def vectorize_files(files, embedding_model, preprocessing_options):
     # Implement your actual embedding logic here
@@ -70,5 +70,5 @@ if __name__ == '__main__':
         sys.exit()
     setup_database_and_table(args.embedding_model, env_dict)
     store_chunks(args.embedding_model,env_dict,parsed)
-
+    create_index(env_dict)
     print(f'Embeddings successfully saved')
