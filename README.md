@@ -85,3 +85,6 @@ python main.py -i input_files -o converted_pdfs -m text-embedding-3-small -c 300
 ## License
 This project is provided as-is without warranty. You are free to modify and distribute under your own terms.
 
+
+## Author
+- Jaro Cech (jaro@nowapp.cz)
