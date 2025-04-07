@@ -1,5 +1,4 @@
 import argparse
-import json
 import os
 import sys
 
@@ -8,14 +7,6 @@ from pathlib import Path
 from convert_2_pdf import convert_files
 from pdf_2_text import files_text_from_directory, token_count, text_price
 from store_2_db import store_chunks, setup_database_and_table, create_index
-
-def vectorize_files(files, embedding_model, preprocessing_options):
-    # Implement your actual embedding logic here
-    embeddings = {}
-    for file in files:
-        embeddings[file] = [0.1, 0.2, 0.3]  # example vector
-    return embeddings
-
 
 def is_directory_readable(directory):
     if len(os.listdir(directory)) == 0:
@@ -63,7 +54,7 @@ if __name__ == '__main__':
     is_directory_writable(args.out_directory)
     convert_files(infiles, args.in_directory, args.out_directory)
     parsed = files_text_from_directory(args.out_directory, args.chunk_size, args.overlapping_size, args.embedding_model, args.overlapping_size + 1)
-    if(args.token_count):
+    if args.token_count:
         total_chunks = token_count(parsed)
         price = text_price(args.embedding_model, total_chunks)
         print(f"Total tokens {total_chunks} - price for {args.embedding_model}: {price} USD")

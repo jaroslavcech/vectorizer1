@@ -26,8 +26,8 @@ def token_count(parsed_files):
     return total
 
 def files_text_from_directory(root_dir, chunk_size, overlap, model_name, min_chunk_size=3):
-    dir = Path(root_dir)
-    pdf_files = list(dir.glob('*.pdf'))
+    r_dir = Path(root_dir)
+    pdf_files = list(r_dir.glob('*.pdf'))
     result = {}
     for f in pdf_files:
         pages = extract_text(f)
@@ -66,13 +66,11 @@ def split_text_into_chunks(pages, chunk_size, overlap, model_name, min_chunk_siz
             chunk_tokens = tokens[token_idx:end_idx]
             chunk_text = encoding.decode(chunk_tokens)
 
-            # Zajištění celých slov na konci
             while end_idx < len(tokens) and not chunk_text.endswith((' ', '\n')):
                 chunk_tokens.append(tokens[end_idx])
                 end_idx += 1
                 chunk_text = encoding.decode(chunk_tokens)
 
-            # Zajištění celých slov na začátku (posuneme počáteční index vpřed)
             while token_idx > 0 and not encoding.decode([tokens[token_idx]]).startswith((' ', '\n')):
                 token_idx -= 1
                 chunk_tokens = tokens[token_idx:end_idx]
