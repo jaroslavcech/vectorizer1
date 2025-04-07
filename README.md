@@ -4,7 +4,7 @@
 This project consists of scripts to convert various file formats to PDF, extract text from PDFs, split text into manageable chunks, calculate tokens and prices for embedding models, and store text chunks along with embeddings into a PostgreSQL database.
 
 ## Features
-- **File Conversion:** Converts `.doc`, `.docx`, `.xls`, `.xlsx`, `.ppt`, `.pptx`, `.odt`, `.txt`, and `.pdf` files to PDF format.
+- **File Conversion:** Converts `.doc`, `.docx`, `.xls`, `.xlsx`, `.ppt`, `.pptx`, `.odt`, `.txt`, and `.pdf` files to PDF format. This list could be easily extended via record in .env file
 - **Text Extraction:** Extracts and splits text from PDF files into chunks suitable for embedding.
 - **Token Counting:** Calculates the total number of tokens and the associated cost based on the embedding model.
 - **Database Integration:** Stores text chunks and their embeddings into a PostgreSQL database.
@@ -14,6 +14,15 @@ This project consists of scripts to convert various file formats to PDF, extract
 PDF format is paginated - so we store to the DB page where the similarity is found
 
 ## Setup and Requirements
+
+### OpenAI API subscription
+You need OpenAI subscription to generate API key 
+
+### pg_vector extension
+You need to install `pg_vector` extension to your Postgres DB 
+
+### Libre Office
+You need to have Libre office installed - try if it runs in headless mode
 
 ### Python Environment
 Create a Python virtual environment and install dependencies:

@@ -19,7 +19,7 @@ def parse_args():
                         help='Chunk size according to the kind of usage. Semantic search=100 chars (30 chars overlap), document classification=300 chars, RAG=800 chars.')
 
     parser.add_argument('-v', '--overlapping_size',  type=int, required=True,
-                        help='Overlapping size in percents 10 - 40 is recommended value (shorter chunk, larger overlapping).')
+                        help='Overlapping size in percents 0 - 40 is recommended value (shorter chunk, larger overlapping).')
 
     parser.add_argument('-t', '--token_count', action='store_true', required=False,
                         help='It only calculates the total number of tokens and the price.')
@@ -27,7 +27,7 @@ def parse_args():
 
     args = parser.parse_args()
     limited_int(args.chunk_size, 50, 8000, 'chunk_size')
-    limited_int(args.overlapping_size, 10, 40, 'overlapping_size')
+    limited_int(args.overlapping_size, 0, 40, 'overlapping_size')
     print('Command line parameters:')
     for key, value in vars(args).items():
         print(f"{key}: {value}")
