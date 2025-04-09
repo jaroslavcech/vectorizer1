@@ -65,6 +65,9 @@ Example:
 ```bash
 python main.py -i input_files -o converted_pdfs -m text-embedding-3-small -c 300 -v 20
 ```
+Clustering:
+If you need to add categories to the database - run clustering.py. It adds tvo columns to the table - cluster_id and cluster (label of the cluster created by chatGPT).
+You can manually modify the key parameters - cluster number and cluster name maximal length
 
 ## Project Structure
 
@@ -76,6 +79,7 @@ python main.py -i input_files -o converted_pdfs -m text-embedding-3-small -c 300
 ├── pdf_2_text.py         # PDF text extraction and chunking
 ├── requirements.txt      # Python dependencies
 └── store_2_db.py         # Database operations and embeddings storage
+└── clustering.py         # Script for creating / changing clusters on vector database
 ```
 
 ## Dependencies
@@ -84,7 +88,6 @@ python main.py -i input_files -o converted_pdfs -m text-embedding-3-small -c 300
 
 ## License
 This project is provided as-is without warranty. You are free to modify and distribute under your own terms.
-
 
 ## Author
 - Jaro Cech (jaro@nowapp.cz)
