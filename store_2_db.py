@@ -34,8 +34,8 @@ def store_chunks(model, env_dict,parsed_files):
                 n = parsed_files[file_chunks][chunk]
                 page, position = chunk.split("_")
                 text = normalize_text(n['text'])
-                if text.strip():
-                    emb = get_embedding2(client, text, model)
+                if len(text.strip()) > 20:
+                    emb = get_embedding2(client, text.strip(), model)
                     embedding_str = np.array(emb).tolist()
                     cursor.execute(f"""
                                     INSERT INTO {table_name} (file, page, position, text_chunk, embedding)
